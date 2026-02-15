@@ -30,32 +30,32 @@ app.get('/', (req, res) => {
   res.send('Backend is Live & Running! 🚀');
 });
 
-// --- 4. Contact Route (Final Logic) ---
+// --- 4. Contact Route ---
 app.post('/api/contact', async (req, res) => {
   const { name, email, message } = req.body;
   
   try {
     console.log("📩 Step 1: Request Received");
 
-    // A. SAVE TO MONGODB (Priority 1)
+    // A. SAVE TO MONGODB
     const newContact = new Contact({ name, email, message });
     await newContact.save();
     console.log("✅ Step 2: Data Saved to MongoDB");
 
-    // B. EMAIL LOGIC (Priority 2 - Wrapped in a separate try-catch)
+    // B. EMAIL LOGIC (Port 465 SSL Fix)
     try {
       const transporter = nodemailer.createTransport({
+        service: 'gmail',
         host: 'smtp.gmail.com',
-        port: 587,
-        secure: false,
+        port: 465,         // <--- 587-la irundhu 465-ku maathiyachu
+        secure: true,      // <--- SSL mode active
         auth: {
           user: process.env.EMAIL_USER,
           pass: process.env.EMAIL_PASS
         },
-        localAddress: '0.0.0.0', 
-        family: 4,               
-        tls: { rejectUnauthorized: false },
-        connectionTimeout: 15000 // 15 seconds limit
+        family: 4,         // Force IPv4
+        connectionTimeout: 20000, 
+        tls: { rejectUnauthorized: false }
       });
 
       const mailOptions = {
@@ -70,16 +70,14 @@ app.post('/api/contact', async (req, res) => {
       console.log("🚀 Step 4: Email Sent Successfully!");
 
     } catch (emailError) {
-      // Email fail aanalum, inga catch aayidum. Server crash aagadhu.
       console.error("⚠️ Email sending failed, but data is safe in DB:", emailError.message);
     }
 
-    // Always send success if DB save is done
     res.status(201).json({ success: "Message Received! ✅" });
 
   } catch (dbError) {
     console.error("❌ DATABASE ERROR:", dbError);
-    res.status(500).json({ error: "Server Error. Please try again later." });
+    res.status(500).json({ error: "Server Error" });
   }
 });
 
