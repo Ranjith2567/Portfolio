@@ -1,8 +1,13 @@
-const express = require('express');
+const dns = require('dns');            // <--- Line 1 (New)
+dns.setDefaultResultOrder('ipv4first'); // <--- Line 2 (THE FIX!)
+
+const express = require('express');    // <--- Apram dhaan mathadhu varanum
 const mongoose = require('mongoose');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
 require('dotenv').config();
+
+// ... (Meethi code ellam appadiye irukkattum, maatha vendam)
 
 const app = express();
 app.use(express.json());
