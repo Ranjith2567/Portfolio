@@ -41,13 +41,16 @@ app.post('/api/contact', async (req, res) => {
    // B. Email Alert Logic (Nodemailer)
     const transporter = nodemailer.createTransport({
       service: 'gmail',
+      host: 'smtp.gmail.com',
+      port: 587,        // <--- Port 465 la irundhu 587 ku maathurpm
+      secure: false,    // <--- Port 587 ku idhu 'false' ah irukkanum (Mukkiyam!)
       auth: {
         user: process.env.EMAIL_USER, 
         pass: process.env.EMAIL_PASS  
       },
-      family: 4 // IPv4 force panna idhu rumba mukkiyam!
+      family: 4 // IPv4 force panradhu thodarum
     });
-
+    
     const mailOptions = {
       from: email,
       to: process.env.EMAIL_USER, 
