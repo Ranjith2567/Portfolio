@@ -8,14 +8,12 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// 1. Cloud MongoDB Atlas Connection
-const MONGO_URI = process.env.MONGO_URI; 
+// --- 1. MongoDB Connection ---
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log("🔥 Cloud MongoDB Connected!"))
+  .catch(err => console.error("❌ MongoDB Error:", err));
 
-mongoose.connect(MONGO_URI)
-  .then(() => console.log("🔥 Cloud MongoDB Atlas Connected Successfully!"))
-  .catch(err => console.error("❌ MongoDB Connection Error:", err));
-
-// 2. Contact Schema
+// --- 2. Schema ---
 const contactSchema = new mongoose.Schema({
   name: String,
   email: String,
@@ -24,48 +22,57 @@ const contactSchema = new mongoose.Schema({
 });
 const Contact = mongoose.model('Contact', contactSchema);
 
-// --- ADD THIS HOME ROUTE TO FIX "CANNOT GET /" ---
+// --- 3. Home Route ---
 app.get('/', (req, res) => {
-  res.send('Backend Server is Running Mass! 🚀');
+  res.send('Backend is Live & Running! 🚀');
 });
 
-// 3. API Route with Email Alert
+// --- 4. Contact Route (With IPv4 Fix) ---
 app.post('/api/contact', async (req, res) => {
   try {
+    console.log("📩 Step 1: Request Received");
     const { name, email, message } = req.body;
 
-    // A. MongoDB Atlas-la save panradhu
+    // A. Save to MongoDB
     const newContact = new Contact({ name, email, message });
     await newContact.save();
+    console.log("✅ Step 2: Data Saved to MongoDB");
 
-// B. Email Alert Logic (Nodemailer) - STRICT IPV4 CONFIG
+    // B. Email Logic (Strict IPv4 & Timed)
     const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",  // Direct Host (No 'service: gmail')
+      host: 'smtp.gmail.com',  // Direct Host
       port: 587,               // TLS Port
-      secure: false,           // Must be false for 587
+      secure: false,           // False for 587
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
       },
       tls: {
-        ciphers: "SSLv3",      // Extra safety
         rejectUnauthorized: false
       },
-      family: 4                // <--- STRICTLY FORCE IPV4
+      family: 4,               // <--- FORCE IPv4
+      connectionTimeout: 10000, // <--- 10 Sec Timeout (Wait pannaadhu!)
+      greetingTimeout: 5000,
+      socketTimeout: 10000
     });
 
     const mailOptions = {
       from: email,
-      to: process.env.EMAIL_USER, 
-      subject: `New Portfolio Message from ${name}`,
-      text: `Got a new message!\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
+      to: process.env.EMAIL_USER,
+      subject: `Portfolio Message: ${name}`,
+      text: `From: ${name} (${email})\n\nMessage:\n${message}`
     };
 
+    console.log("📤 Step 3: Attempting to Send Email...");
     await transporter.sendMail(mailOptions);
+    console.log("🚀 Step 4: Email Sent Successfully!");
+
     res.status(201).json({ success: "Message Saved & Email Sent! ✅" });
+
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Server Error ❌" });
+    console.error("❌ ERROR DETECTED:", error);
+    // Error vandhalum, Database save aagi irundha 'Partial Success' nu sollam
+    res.status(500).json({ error: "Failed to send email, but data saved! ⚠️" });
   }
 });
 
