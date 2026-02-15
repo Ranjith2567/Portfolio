@@ -37,20 +37,19 @@ app.post('/api/contact', async (req, res) => {
     // A. MongoDB Atlas-la save panradhu
     const newContact = new Contact({ name, email, message });
     await newContact.save();
-
-   // B. Email Alert Logic (Nodemailer)
+    
+// B. Email Alert Logic (Nodemailer)
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      host: 'smtp.gmail.com',
-      port: 587,        // <--- Port 465 la irundhu 587 ku maathurpm
-      secure: false,    // <--- Port 587 ku idhu 'false' ah irukkanum (Mukkiyam!)
+      host: 'smtp.gmail.com', // 'service: gmail' thevai illa, idhu innum reliable
+      port: 587,              // 587 is standard for modern hosting
+      secure: false,          // 587 ku idhu false-a irukkanum
       auth: {
         user: process.env.EMAIL_USER, 
         pass: process.env.EMAIL_PASS  
       },
-      family: 4 // IPv4 force panradhu thodarum
+      family: 4 // <--- IDHU DHAAN MUKKIYAM! IPv4 Mattum use panna sollum.
     });
-    
+
     const mailOptions = {
       from: email,
       to: process.env.EMAIL_USER, 
