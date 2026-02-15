@@ -43,24 +43,24 @@ app.post('/api/contact', async (req, res) => {
     await newContact.save();
     console.log("✅ Step 2: Data Saved to MongoDB");
 
-    // B. Email Logic (Strict IPv4 & Timed)
+    // B. Email Alert Logic (IPv4 FORCED)
     const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',  // Direct Host
-      port: 587,               // TLS Port
-      secure: false,           // False for 587
+      host: 'smtp.gmail.com',
+      port: 587,
+      secure: false,
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
       },
+      // INDHA RENDU LINE ROMBA MUKKIYAM 👇
+      localAddress: '0.0.0.0', // Forces IPv4 binding
+      family: 4,               // Forces IPv4 resolution
+      
       tls: {
         rejectUnauthorized: false
-      },
-      family: 4,               // <--- FORCE IPv4
-      connectionTimeout: 10000, // <--- 10 Sec Timeout (Wait pannaadhu!)
-      greetingTimeout: 5000,
-      socketTimeout: 10000
+      }
     });
-
+    
     const mailOptions = {
       from: email,
       to: process.env.EMAIL_USER,
