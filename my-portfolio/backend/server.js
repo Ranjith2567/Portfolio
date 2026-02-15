@@ -38,13 +38,14 @@ app.post('/api/contact', async (req, res) => {
     const newContact = new Contact({ name, email, message });
     await newContact.save();
 
-    // B. Email Alert Logic (Nodemailer)
+   // B. Email Alert Logic (Nodemailer)
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
         user: process.env.EMAIL_USER, 
         pass: process.env.EMAIL_PASS  
-      }
+      },
+      family: 4 // IPv4 force panna idhu rumba mukkiyam!
     });
 
     const mailOptions = {
