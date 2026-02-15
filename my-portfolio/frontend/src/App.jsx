@@ -180,7 +180,7 @@ const App = () => {
     Recent <span style={{ color: '#a855f7', WebkitTextFillColor: '#a855f7' }}>Projects</span>
   </h2>
   
-  {/* 🔥 Responsive fix for gap and alignment */}
+  {/* 🔥 Class name mattum sethirukkaen mobile gap fix-kaaga */}
   <div className="projects-grid-container">
     <ProjectCard3D 
       title="Student Management System" 
@@ -188,7 +188,7 @@ const App = () => {
       tags={[Code, Server, Database]} 
       color="#a855f7" 
       icon={<Server size={50} color="#fff" />} 
-      link="https://github.com/Ranjith2567" 
+      link="/" 
     />
     <ProjectCard3D 
       title="File Recovery Tool" 
@@ -196,7 +196,7 @@ const App = () => {
       tags={[Terminal, Code, Layers]} 
       color="#3b82f6" 
       icon={<Terminal size={50} color="#fff" />} 
-      link="https://github.com/Ranjith2567" 
+      link="/" 
     />
     <ProjectCard3D 
       title="Grocery website" 
@@ -204,7 +204,7 @@ const App = () => {
       tags={[Globe, Code, Layers]} 
       color="#4ade80" 
       icon={<Globe size={50} color="#fff" />} 
-      link="https://github.com/Ranjith2567" 
+      link="http://grocery.techscope.sbs/" 
     />
   </div>
 </div>
