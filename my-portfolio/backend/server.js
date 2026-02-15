@@ -38,19 +38,20 @@ app.post('/api/contact', async (req, res) => {
     const newContact = new Contact({ name, email, message });
     await newContact.save();
 
-// B. Email Alert Logic (Nodemailer)
+// B. Email Alert Logic (Nodemailer) - STRICT IPV4 CONFIG
     const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 587,
-      secure: false, // Port 587-ku idhu false-a irukkanum
+      host: "smtp.gmail.com",  // Direct Host (No 'service: gmail')
+      port: 587,               // TLS Port
+      secure: false,           // Must be false for 587
       auth: {
-        user: process.env.EMAIL_USER, 
-        pass: process.env.EMAIL_PASS  
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
       },
       tls: {
-        rejectUnauthorized: false // Extra safety for Render
+        ciphers: "SSLv3",      // Extra safety
+        rejectUnauthorized: false
       },
-      family: 4 // <--- IDHU DHAAN MUKKIYAM (Forces IPv4)
+      family: 4                // <--- STRICTLY FORCE IPV4
     });
 
     const mailOptions = {
