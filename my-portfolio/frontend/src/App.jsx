@@ -161,15 +161,15 @@ const App = () => {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '25px', zIndex: 2, position: 'relative' }}>
               <div style={{ borderLeft: '2px solid #3b82f6', paddingLeft: '15px', position: 'relative' }}>
                 <div style={{ position: 'absolute', left: '-6px', top: '0', width: '10px', height: '10px', borderRadius: '50%', background: '#3b82f6', boxShadow: '0 0 10px #3b82f6' }}></div>
-                <h4 style={{ margin: '0', color: '#fff' }}>Machine Learning Intern (current)</h4>
+                <h4 style={{ margin: '0', color: '#fff' }}>Machine Learning Intern</h4>
                 <p style={{ margin: '0', fontSize: '0.9rem', color: '#3b82f6', fontWeight: 'bold' }}>AS Global Soft Tech</p>
-                <p style={{ margin: '5px 0 0 0', fontSize: '0.85rem', color: '#9ca3af' }}>Predictive modeling & Data Analysis using NumPy and Pandas.</p>
+                <p style={{ margin: '5px 0 0 0', fontSize: '0.85rem', color: '#9ca3af' }}>I developed a predictive modeling pipeline using NumPy and Pandas to extract insights from complex datasets. Leveraging my AI/ML Research background, I performed data preprocessing and feature engineering to build high-performance statistical models. This project showcases my proficiency in exploratory data analysis (EDA) and numerical computing to forecast trends and solve real-world problems.</p>
               </div>
               <div style={{ borderLeft: '2px solid #a855f7', paddingLeft: '15px', position: 'relative' }}>
                 <div style={{ position: 'absolute', left: '-6px', top: '0', width: '10px', height: '10px', borderRadius: '50%', background: '#a855f7' }}></div>
                 <h4 style={{ margin: '0', color: '#fff' }}>MERN Stack Intern</h4>
                 <p style={{ margin: '0', fontSize: '0.9rem', color: '#a855f7', fontWeight: 'bold' }}>GT Software</p>
-                <p style={{ margin: '5px 0 0 0', fontSize: '0.85rem', color: '#9ca3af' }}>Worked on full-stack development using React.js, Node.js, and MongoDB. Enhanced UI with React Bootstrap and deployed on AWS for Scalability.</p>
+                <p style={{ margin: '5px 0 0 0', fontSize: '0.85rem', color: '#9ca3af' }}>I engineered a robust full-stack application leveraging the MERN stack (MongoDB, Express, React, and Node.js) to deliver a scalable and high-performance solution. I enhanced the user interface using React Bootstrap to ensure a mobile-first, responsive design and streamlined the user experience. The application was successfully deployed on AWS, focusing on cloud scalability and reliability. This project demonstrates my proficiency in managing end-to-end development, from schema design in MongoDB to cloud deployment strategies.</p>
               </div>
             </div>
           </motion.div>
@@ -183,24 +183,24 @@ const App = () => {
   {/* 🔥 Class name mattum sethirukkaen mobile gap fix-kaaga */}
   <div className="projects-grid-container">
     <ProjectCard3D 
-      title="Student Management System" 
-      desc="A complete Student Management System with Admin, Student, and Staff panels. Features Role-Based Access Control (RBAC)." 
+      title="Smart Campus Manager" 
+      desc="Developed a full-stack MERN ecosystem featuring dedicated Admin, Staff, and Student panels with secure Role-Based Access Control (RBAC). The system utilizes JWT for protected authentication and is cloud-deployed on Vercel and Render with MongoDB Atlas. It ensures seamless real-time data flow for campus operations with a responsive UI and integrated email notifications."
       tags={[Code, Server, Database]} 
       color="#a855f7" 
       icon={<Server size={50} color="#fff" />} 
-      link="/" 
+      link="https://smart-campus-manager.vercel.app/" 
     />
     <ProjectCard3D 
       title="File Recovery Tool" 
-      desc="System-level utility built with Python FastAPI to scan storage drives and recover lost or deleted files efficiently." 
+      desc="I engineered a system-level recovery tool using Python FastAPI and React (Vite) to reconstruct deleted files via deep-sector scanning. By analyzing raw binary disk streams for unique file signatures (Magic Numbers), the engine extracts formats like JPEG, PDF, and MP4 even after file system deletion. The project features an asynchronous real-time dashboard with live previews and a native OS folder picker, demonstrating my ability to bridge low-level logic with modern full-stack architecture."
       tags={[Terminal, Code, Layers]} 
       color="#3b82f6" 
       icon={<Terminal size={50} color="#fff" />} 
-      link="/" 
+     
     />
     <ProjectCard3D 
       title="Grocery website" 
-      desc="A responsive e-commerce frontend for a grocery store, featuring dynamic product listings and cart management." 
+      desc="I developed a high-performance, responsive e-commerce frontend for a grocery store using React and Tailwind CSS. The application features dynamic product listings with real-time filtering and a sophisticated cart management system for a seamless user experience. By leveraging React's state management, I optimized the shopping flow, ensuring instant updates to the cart and total calculations. This project demonstrates my proficiency in building scalable, mobile-first user interfaces and managing complex application states within the MERN stack ecosystem."
       tags={[Globe, Code, Layers]} 
       color="#4ade80" 
       icon={<Globe size={50} color="#fff" />} 
