@@ -199,12 +199,12 @@ const App = () => {
      
     />
     <ProjectCard3D 
-      title="Grocery website" 
-      desc="I developed a high-performance, responsive e-commerce frontend for a grocery store using React and Tailwind CSS. The application features dynamic product listings with real-time filtering and a sophisticated cart management system for a seamless user experience. By leveraging React's state management, I optimized the shopping flow, ensuring instant updates to the cart and total calculations. This project demonstrates my proficiency in building scalable, mobile-first user interfaces and managing complex application states within the MERN stack ecosystem."
+      title="HealthEdge AI" 
+      desc="HealthEdge AI is a full-stack clinical decision support system designed to automate patient risk assessment. Leveraging a Random Forest machine learning model, the application predicts diabetes risk based on clinical data while integrating a hybrid triage logic that prioritizes cases using real-time vitals like Glucose and Blood Pressure. Built with Flask and MongoDB Atlas, and deployed on Render, the system provides a seamless, cloud-based dashboard for medical professionals to monitor and manage urgent patient needs efficiently."
       tags={[Globe, Code, Layers]} 
       color="#4ade80" 
       icon={<Globe size={50} color="#fff" />} 
-      link="http://grocery.techscope.sbs/" 
+      link="https://healthedge-l5gz.onrender.com/"
     />
   </div>
 </div>
